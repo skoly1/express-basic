@@ -1,21 +1,15 @@
 const express = require("express");
+const { signup, userController } = require("./src/controllers/userController");
+const { UserAuth } = require("./src/middlewares/userAuth");
 
 const app = express();
 
 app.use(express.json());
 
 // Create Routes
-app.use("/user/signup", (req, res) => {
-  res.status(200).json({
-    status: "Signup User Route",
-  });
-});
+app.use("/user/signup", signup);
 
-app.use("/user", (req, res) => {
-  res.status(200).json({
-    status: " User Route",
-  });
-});
+app.use("/user", UserAuth, userController);
 
 // Handle wrong routes
 app.all("*", (req, res, next) => {
