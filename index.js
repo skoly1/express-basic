@@ -6,11 +6,10 @@ const app = express();
 
 app.use(express.json());
 
-const router = express.Router();
 
-router.post("/user/signup", signup);
+app.use("/user/signup", signup);
 
-router.post("/user", UserAuth, userController);
+app.use("/user", UserAuth, userController);
 
 
 // Handle wrong routes
